@@ -25,7 +25,7 @@ body {
     margin: auto;
     display: flex;
     flex-direction: column;
-    height: 100dvh;
+    min-height: 100dvh;
 }
 
 #header {
@@ -50,8 +50,24 @@ body {
     flex-grow: 1;
 }
 
-button {
-    background-color: red;
+#posts-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    row-gap: 15px;
+}
+
+#contact-form {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type=submit]:disabled {
+    background-color: lightgray;
+}
+
+input[type=submit]:not(:disabled) {
+    cursor: pointer;
 }
 
 .hide-section {

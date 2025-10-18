@@ -1,4 +1,5 @@
 const form = document.getElementById('contact-form');
+const submitBtn = document.getElementById('form-submit');
 const email = document.getElementById('form-email');
 const name = document.getElementById('form-name');
 const confirm = document.getElementById('form-confirm');
@@ -28,15 +29,6 @@ form.addEventListener('submit', (e) => {
         }
     }
 
-    if (!confirm.checkValidity()) {
-        e.preventDefault();
-        if (confirm.validity.valueMissing) {
-            addErrorMsg(errorMessages, confirm, 'Must be checked.')
-        } else {
-            addErrorMsg(errorMessages, confirm, 'Unknown error.')
-        }
-    }
-
     errorContainer.innerHTML = "";
     if (errorMessages.length > 0) {
         for (const error of errorMessages) {
@@ -45,6 +37,10 @@ form.addEventListener('submit', (e) => {
             errorContainer.appendChild(p)
         }
     }
+});
+
+confirm.addEventListener("change", (e) => {
+    submitBtn.disabled = !confirm.checked;
 });
 
 function addErrorMsg(errorMessages, inputElement, errorMessage) {

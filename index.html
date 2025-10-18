@@ -6,8 +6,9 @@
     <meta name="" content="">
     <title></title>
     <link rel="stylesheet" href="stylesheet.css" type="text/css">
+    <script type="text/javascript" src="components/post.js"></script>
     <script type="text/javascript" src="script.js"></script>
-    <!--From the book: (for settiNg the page size to the device)-->
+    <!--From the book: (for setting the page size to the device)-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -23,14 +24,18 @@
     </nav>
 </header>
 <main id="content-sections">
+
     <section id="content-home" class="hide-section">
         <h2>Website</h2>
         <article>
             <p>Some information about how this website works</p>
         </article>
     </section>
-    <section id="content-posts" class="hide-section">
 
+    <section id="content-posts" class="hide-section">
+        <h2>Posts</h2>
+        <div id="posts-container"></div>
+        <button id="load-more-btn" onclick="loadPosts()">Load more</button>
     </section>
     <section id="content-contact" class="hide-sectiond">
         <form id="contact-form" novalidate>
@@ -40,7 +45,6 @@
                    name="Name"
                    title="Your name"
                    pattern="^[^0-9]*$">
-            <br>
 
             <label for="form-email">E-mail:</label><br>
             <!-- E-mail inputs come with default e-mail validation -->
@@ -50,15 +54,12 @@
                    name="E-mail"
                    title="Your e-mail"
                    pattern="^.*[.].*$"> <!--Default e-mail validation doesn't check for period. Let's add a check.-->
-            <br>
 
             <label for="form-confirm">Confirm to send</label><br>
-            <input type="checkbox" required id="form-confirm" name="Confirm" value="confirm"
+            <input type="checkbox" id="form-confirm" name="Confirm" value="confirm"
                    title="Checkbox must be checked">
 
-            <input type="submit" value="Submit">
-
-            <br>
+            <input type="submit" value="Submit" id="form-submit" disabled>
 
             <div id="form-errors"></div>
         </form>
