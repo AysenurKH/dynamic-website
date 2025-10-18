@@ -1,5 +1,5 @@
 * {
-    margin: 5px;
+    margin: 0;
     background-color: var(--colorlight);
     color: var(--colordarkbrown);
     font-family: Arial, 'Courier New', sans-serif;
@@ -20,12 +20,15 @@
 
 }
 
-#mainpage-body {
-    display: grid;
-    grid-template-columns: 100%;
+body {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
 }
 
-#mainpage-header {
+#header {
     border: var(--colordarkbrown) 3px solid;
     display: flex;
     background-color: var(--colorpink);
@@ -34,12 +37,25 @@
     padding: 6px 3px;
 }
 
-#mainpage-navigation {
+#navigation {
     background-color: var(--colorpink);
+}
+
+.welcome-text {
+    padding: 10px;
+}
+
+#content-sections {
+    padding: 20px;
+    flex-grow: 1;
 }
 
 button {
     background-color: red;
+}
+
+.hide-section {
+    display: none;
 }
 
 footer {

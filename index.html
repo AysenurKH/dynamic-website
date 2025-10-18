@@ -10,28 +10,61 @@
     <!--From the book: (for settiNg the page size to the device)-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body id="mainpage-body">
-<h1>Welcome to Forest Books!</h1>
-<header id="mainpage-header">
+<body>
+<div class="welcome-text">
+    <h1>Welcome to Forest Books!</h1>
+</div>
+<header id="header">
     <img src="media/logo2.png" alt="Website logo for Forest Books" width="100" height="100">
-    <nav id="mainpage-navigation">
-        <a href="">Home</a>
-        <a href="">Genres</a>
+    <nav id="navigation">
+        <button id="nav-home" onclick="homeClicked()">Home</button>
+        <button id="nav-posts" onclick="postsClicked()">Posts</button>
+        <button id="nav-contact" onclick="contactClicked()">Contact</button>
     </nav>
 </header>
-<main id="mainpagemain">
-    <div id="mainpage-div-genres">
-        <h3>Genres:</h3>
-        <div id="mainpage-genrelist">
-            <ul>
-                <li>Fiction</li>
-                <li>Nonfiction</li>
-                <li>Art</li>
-                <li>Travel</li>
-            </ul>
-        </div>
-    </div>
-    <div id="mainpage-div-bookcardcontainer">
+<main id="content-sections">
+    <section id="content-home" class="hide-section">
+        <h2>Website</h2>
+        <article>
+            <p>Some information about how this website works</p>
+        </article>
+    </section>
+    <section id="content-posts" class="hide-section">
+
+    </section>
+    <section id="content-contact" class="hide-sectiond">
+        <form id="contact-form" novalidate>
+            <label for="form-name">Name:</label><br>
+            <input type="text"
+                   id="form-name"
+                   name="Name"
+                   title="Your name"
+                   pattern="^[^0-9]*$">
+            <br>
+
+            <label for="form-email">E-mail:</label><br>
+            <!-- E-mail inputs come with default e-mail validation -->
+            <input type="email"
+                   required
+                   id="form-email"
+                   name="E-mail"
+                   title="Your e-mail"
+                   pattern="^.*[.].*$"> <!--Default e-mail validation doesn't check for period. Let's add a check.-->
+            <br>
+
+            <label for="form-confirm">Confirm to send</label><br>
+            <input type="checkbox" required id="form-confirm" name="Confirm" value="confirm"
+                   title="Checkbox must be checked">
+
+            <input type="submit" value="Submit">
+
+            <br>
+
+            <div id="form-errors"></div>
+        </form>
+    </section>
+
+    <div id="mainpage-div-bookcardcontainer" hidden>
         <h2>Price ↓</h2>
         <div class="mainpage-div-filteringcontainer">
             <article class="mainpage-div-eachbookcard">
@@ -42,69 +75,6 @@
                 <small>Summary: A man races to travel around the world in 80 days to win a bet.</small>
                 <p><strong>
                     <mark>Price: 200 SEK</mark>
-                </strong></p>
-            </article>
-            <article class="mainpage-div-eachbookcard">
-                <img src="media/book6.png" class="mainpage-bookcardimage"
-                     alt="Dark book cover with mountains and a red sun." width="100%" height="50%">
-                <h4 class="bookcardtitle"><strong>The Hobbit</strong></h4>
-                <p><strong>Author: JRR Tolkien</strong></p>
-                <small>Summary: A cosy advanture in the middle earth.</small>
-                <p><strong>
-                    <mark>Price: 230 SEK</mark>
-                </strong></p>
-            </article>
-            <article class="mainpage-div-eachbookcard">
-                <img src="media/book5.png" class="mainpage-bookcardimage"
-                     alt="Yellow book cover with two eyes looking to left." width="100%" height="50%">
-                <h4 class="bookcardtitle"><strong>Yellowface</strong></h4>
-                <p><strong>Author: RF Kuang</strong></p>
-                <small>Summary: The flora of our blue planet.</small>
-                <p><strong>
-                    <mark>Price: 245 SEK</mark>
-                </strong></p>
-            </article>
-            <article class="mainpage-div-eachbookcard">
-                <img src="media/book1.jpg" class="mainpage-bookcardimage"
-                     alt="Dark blue cover picture with a woman in the background." width="100%" height="50%">
-                <h4 class="bookcardtitle"><strong>A Teaspoon of Earth and Sea</strong></h4>
-                <p><strong>Author: Dina Nayerig</strong></p>
-                <small>Summary: Story of a woman who travels to Scotland.</small>
-                <p><strong>
-                    <mark>Price: 250 SEK</mark>
-                </strong></p>
-            </article>
-        </div>
-        <h2>Author abc↓</h2>
-        <div class="mainpage-div-filteringcontainer">
-            <article class="mainpage-div-eachbookcard">
-                <img src="media/book2.jpg" class="mainpage-bookcardimage"
-                     alt="Abstract art book cover with dark blue and white tones." width="100%" height="50%">
-                <h4 class="bookcardtitle"><strong>Brave New World</strong></h4>
-                <p><strong>Author: Aldous Huxley</strong></p>
-                <small>Summary: Coloring book for children or those have a child's heart.</small>
-                <p><strong>
-                    <mark>Price: 220 SEK</mark>
-                </strong></p>
-            </article>
-            <article class="mainpage-div-eachbookcard">
-                <img src="media/book3.jpg" class="mainpage-bookcardimage"
-                     alt="Orange, yellow, black book cover with letters." width="100%" height="50%">
-                <h4 class="bookcardtitle"><strong>City of Orange</strong></h4>
-                <p><strong>Author: David Yoon</strong></p>
-                <small>Summary: A story book that compiles multiple interesting tales around the world.</small>
-                <p><strong>
-                    <mark>Price: 295 SEK</mark>
-                </strong></p>
-            </article>
-            <article class="mainpage-div-eachbookcard">
-                <img src="media/book4.jpg" class="mainpage-bookcardimage" alt="Dark blue book cover with two eyes."
-                     width="100%" height="50%">
-                <h4 class="bookcardtitle"><strong>The Great Gatsby</strong></h4>
-                <p><strong>Author: F Scott Fitzgerald</strong></p>
-                <small>Summary: Story of a magic forest.</small>
-                <p><strong>
-                    <mark>Price: 270 SEK</mark>
                 </strong></p>
             </article>
         </div>
@@ -124,5 +94,7 @@
         <p>Address: 123 Book St Booktown 90292</p>
     </div>
 </footer>
+<!--Importing this after the body so that the script can find the form elements in the HTML document.-->
+<script type="text/javascript" src="formvalidation.js"></script>
 </body>
 </html>
