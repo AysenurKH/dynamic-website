@@ -1,4 +1,4 @@
-class Post extends HTMLElement {
+export class Post extends HTMLElement {
     constructor(id, title, body, reactions, tags, userName, views) {
         super()
         this.id = id;
@@ -40,4 +40,3 @@ class Post extends HTMLElement {
 
 }
 customElements.define('my-post', Post);
-window.Post = Post;

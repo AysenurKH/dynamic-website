@@ -1,23 +1,37 @@
+import {Post} from "./components/post.js";
+import {Reaction} from "./components/reaction.js";
+
 const userIdUserNameMap = new Map();
 
 let postsFetchedSoFar = 0;
 let postsTotalAvailable = Number.MAX_SAFE_INTEGER;
 const postsToFetchAtATime = 3;
 
-function homeClicked() {
+const postsSection = document.getElementById("posts-container");
+const homeBtn = document.getElementById('nav-home');
+const postsBtn = document.getElementById('nav-posts');
+const contactBtn = document.getElementById('nav-contact');
+const loadMoreBtn = document.getElementById('load-more-btn');
+
+homeBtn.addEventListener("click", (e) => {
     hideAllSections();
     showSectionById("content-home");
-}
+});
 
-function postsClicked() {
+postsBtn.addEventListener("click", (e) => {
     hideAllSections();
     showSectionById("content-posts");
-}
+});
 
-function contactClicked() {
+contactBtn.addEventListener("click", (e) => {
     hideAllSections();
     showSectionById("content-contact");
-}
+});
+
+loadMoreBtn.addEventListener("click", (e) => {
+    loadPosts()
+        .then();
+})
 
 function hideAllSections() {
     let mainContent = document.getElementById("content-sections")
@@ -30,15 +44,8 @@ function showSectionById(id) {
     document.getElementById(id).classList.remove("hide-section");
 }
 
-class Reaction {
-    constructor(likes, dislikes) {
-        this.likes = likes;
-        this.dislikes = dislikes;
-    }
-}
 
 async function loadPosts() {
-    const loadMoreBtn = document.getElementById("load-more-btn");
     loadMoreBtn.disabled = true;
 
     if (postsFetchedSoFar >= postsTotalAvailable) return;
@@ -46,8 +53,6 @@ async function loadPosts() {
     if (userIdUserNameMap.size === 0) {
         await fetchAllUsers();
     }
-
-    const postsSection = document.getElementById("posts-container");
 
     try {
         const response = await fetch(`https://dummyjson.com/posts?limit=${postsToFetchAtATime}&skip=${postsFetchedSoFar}`);
@@ -68,13 +73,10 @@ async function loadPosts() {
             postsSection.appendChild(postObject)
         }
     } catch (error) {
-        console.log("Error fetching posts")
+        console.log("Error fetching posts", error)
     }
 
-
-
-
-    if(postsFetchedSoFar >= postsTotalAvailable){
+    if (postsFetchedSoFar >= postsTotalAvailable) {
         loadMoreBtn.style.display = "none";
     }
 
@@ -82,14 +84,14 @@ async function loadPosts() {
 }
 
 
-
-
 async function fetchAllUsers() {
     try {
         const res = await fetch(`https://dummyjson.com/users?limit=0&select=username`);
         const usersResponse = await res.json();
-        for (const user of usersResponse["users"]) {
-            userIdUserNameMap.set(user["id"], user["username"])
+        const {users} = usersResponse;
+        for (const user of users) {
+            const {id, username} = user;
+            userIdUserNameMap.set(id, username)
         }
     } catch (error) {
         console.log("Error fetching users", error)
