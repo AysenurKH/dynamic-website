@@ -16,14 +16,14 @@
 <header id="header">
     <img src="media/logo2.png" alt="Website logo for Forest Books" width="100" height="100">
     <nav id="navigation">
-        <button id="nav-home">Home</button>
+        <button id="nav-home" class="selected">Home</button>
         <button id="nav-posts">Posts</button>
         <button id="nav-contact">Contact</button>
     </nav>
 </header>
 <main id="content-sections">
 
-    <section id="content-home" class="hide-section">
+    <section id="content-home">
         <h2>Website</h2>
         <article>
             <p>Some information about how this website works</p>
@@ -36,7 +36,7 @@
         <button id="load-more-btn">Load more</button>
     </section>
 
-    <section id="content-contact" class="hide-sectiond">
+    <section id="content-contact" class="hide-section">
         <form id="contact-form" novalidate>
             <label for="form-name">Name:</label><br>
             <input type="text"
@@ -63,30 +63,9 @@
             <div id="form-errors"></div>
         </form>
     </section>
-
-    <div id="mainpage-div-bookcardcontainer" hidden>
-        <h2>Price ↓</h2>
-        <div class="mainpage-div-filteringcontainer">
-            <article class="mainpage-div-eachbookcard">
-                <img src="media/book9.jpg" class="mainpage-bookcardimage"
-                     alt="Orange toned book cover illustration." width="100%" height="50%">
-                <h4 class="bookcardtitle"><strong>James and the Giant Peach</strong></h4>
-                <p><strong>Author: Roald Dahl</strong></p>
-                <small>Summary: A man races to travel around the world in 80 days to win a bet.</small>
-                <p><strong>
-                    <mark>Price: 200 SEK</mark>
-                </strong></p>
-            </article>
-        </div>
-    </div>
 </main>
 <footer>
     <img src="media/logo2.png" alt="Website logo" width="100" height="100">
-    <form>
-        <label for="newsletter">Sign up to our newsletter: </label>
-        <input type="email" id="newsletter" placeholder="janedoe@mail.com">
-        <button type="submit" class="button">Sign Up</button>
-    </form>
     <div id="contactinfo">
         <h5>Contact Us:</h5>
         <p>Email: bookshop@books.com </p>
