@@ -1,37 +1,37 @@
 const form = document.getElementById('contact-form');
-const submitBtn = document.getElementById('form-submit');
-const email = document.getElementById('form-email');
-const name = document.getElementById('form-name');
-const confirm = document.getElementById('form-confirm');
+const submitButton = document.getElementById('form-submit');
+const emailTextField = document.getElementById('form-email');
+const nameTextField = document.getElementById('form-name');
+const confirmCheckbox = document.getElementById('form-confirm');
 const errorContainer = document.getElementById('form-errors');
 
 form.addEventListener('submit', (e) => {
-    let errorMessages = [];
-    if (!name.checkValidity()) {
+    let errorMessagesList = [];
+    if (!nameTextField.checkValidity()) {
         e.preventDefault();
-        if (name.validity.patternMismatch) {
-            addErrorMsg(errorMessages, name, 'Must not contain numbers.')
+        if (nameTextField.validity.patternMismatch) {
+            addErrorMessageToList(errorMessagesList, nameTextField, 'Must not contain numbers.')
         } else {
-            addErrorMsg(errorMessages, name, 'Unknown error.')
+            addErrorMessageToList(errorMessagesList, nameTextField, 'Unknown error.')
         }
     }
 
-    if (!email.checkValidity()) {
+    if (!emailTextField.checkValidity()) {
         e.preventDefault(); // prevent form submission
-        if (email.validity.valueMissing) {
-            addErrorMsg(errorMessages, email, 'Email is required.')
-        } else if (email.validity.patternMismatch) {
-            addErrorMsg(errorMessages, email, 'Email must contain "@" and a period.')
-        } else if (email.validity.typeMismatch) {
-            addErrorMsg(errorMessages, email, 'Please enter a valid email address.')
+        if (emailTextField.validity.valueMissing) {
+            addErrorMessageToList(errorMessagesList, emailTextField, 'Email is required.')
+        } else if (emailTextField.validity.patternMismatch) {
+            addErrorMessageToList(errorMessagesList, emailTextField, 'Email must contain "@" and a period.')
+        } else if (emailTextField.validity.typeMismatch) {
+            addErrorMessageToList(errorMessagesList, emailTextField, 'Please enter a valid email address.')
         } else {
-            addErrorMsg(errorMessages, email, 'Invalid email.')
+            addErrorMessageToList(errorMessagesList, emailTextField, 'Invalid email.')
         }
     }
 
     errorContainer.innerHTML = "";
-    if (errorMessages.length > 0) {
-        for (const error of errorMessages) {
+    if (errorMessagesList.length > 0) {
+        for (const error of errorMessagesList) {
             let p = document.createElement('p');
             p.innerHTML = error;
             errorContainer.appendChild(p)
@@ -39,10 +39,10 @@ form.addEventListener('submit', (e) => {
     }
 });
 
-confirm.addEventListener("change", (e) => {
-    submitBtn.disabled = !confirm.checked;
+confirmCheckbox.addEventListener("change", (e) => {
+    submitButton.disabled = !confirmCheckbox.checked;
 });
 
-function addErrorMsg(errorMessages, inputElement, errorMessage) {
+function addErrorMessageToList(errorMessages, inputElement, errorMessage) {
     errorMessages.push(inputElement.name + ': ' + errorMessage);
 }

@@ -20,10 +20,14 @@
 }
 
 body {
+    /* Max-width + "margin: auto" ensures that the content of the page takes up the full width of the screen, except if the screen is more than 1200px.
+    In that case, the content of the page stops at a width of 1200px, and the remaining part of the screen becomes empty margin that is distributed equally on both sides of the content.
+    This causes the content to sit in the middle of the page on wider screens. */
     max-width: 1200px;
     margin: auto;
     display: flex;
     flex-direction: column;
+    /* This min-height ensures that the page always takes up the entire height of the screen. */
     min-height: 100dvh;
 }
 
@@ -46,6 +50,8 @@ body {
 
 #content-sections {
     padding: 20px;
+    /* We set min-height of the body to be 100dvh. This flex-grow: 1 ensures that the section that grows to fill the space is the container between the header and the footer
+    This means that the header will always be at the top, and the footer will always be at the bottom. */
     flex-grow: 1;
 }
 
@@ -56,6 +62,7 @@ body {
     row-gap: 15px;
 }
 
+/* Sets the color of the selected nav button */
 button.selected {
     background-color: red;
 }
@@ -87,16 +94,25 @@ button.selected {
     flex-direction: column;
 }
 
+/* Sets the color of the form submit button when it is disabled */
 input[type=submit]:disabled {
     background-color: lightgray;
 }
 
+/* Sets the color of the form submit button when it is NOT disabled */
 input[type=submit]:not(:disabled) {
     cursor: pointer;
 }
 
-.hide-section {
+section.hide-section {
     display: none;
+}
+
+/* Centers the dialog, instead of having it stuck to the top left corner of the screen. */
+dialog {
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
 }
 
 footer {
