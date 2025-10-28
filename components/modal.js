@@ -6,7 +6,7 @@ modalCloseButton.addEventListener("click", (e) => {
     modal.close();
 })
 
-export function showModal(text){
+export function showMyModal(text){
     modalText.innerText = text;
     modal.showModal();
 }

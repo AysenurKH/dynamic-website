@@ -1,5 +1,5 @@
 import {Post} from "./components/post.js";
-import {showModal} from "./components/modal.js";
+import {showMyModal} from "./components/modal.js";
 
 // Documentation: https://dummyjson.com/docs/posts
 
@@ -33,9 +33,10 @@ async function fetchPosts() {
         const response = await fetch(`https://dummyjson.com/posts?limit=${postsToFetchAtATime}&skip=${postsFetchedSoFar}`);
 
         if (!response.ok) {
-            showModal(`HTTP ${response.status} – ${response.statusText}`);
+            showMyModal(`HTTP ${response.status} – ${response.statusText}`);
         }
 
+        // response.json() returns the body of the HTTP response from the server. This is a promise, so we need to await that one also
         const {posts, total} = await response.json();
         postsFetchedSoFar += posts.length;
         postsTotalAvailable = total;
@@ -51,7 +52,7 @@ async function fetchPosts() {
 
     } catch (error) {
         loadMoreBtn.disabled = false;
-        showModal(`Error fetching posts: ${error}`)
+        showMyModal(`Error fetching posts: ${error}`)
     }
 }
 
@@ -70,7 +71,7 @@ async function fetchAllUsers() {
         // select=username so that we only get the username. It's the only field we need, and it will speed up the response.
         const response = await fetch(`https://dummyjson.com/users?limit=0&select=username`);
         if (!response.ok) {
-            showModal(`HTTP ${response.status} – ${response.statusText}`);
+            showMyModal(`HTTP ${response.status} – ${response.statusText}`);
         }
         const usersResponse = await response.json();
         const {users} = usersResponse;
@@ -79,6 +80,6 @@ async function fetchAllUsers() {
             userIdUserNameMap.set(id, username)
         }
     } catch (error) {
-        showModal(`Error fetching posts: ${error}`)
+        showMyModal(`Error fetching posts: ${error}`)
     }
 }

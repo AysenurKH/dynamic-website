@@ -20,7 +20,7 @@ contactBtn.addEventListener("click", (e) => {
     highlightNavButtonById("nav-contact");
 });
 
-// Hides all sections, and removes the selected class from all nav buttons. Clean slate!
+// Hides all sections, and removes the selected class from all nav buttons. Clean slate.
 function resetSelection() {
     const mainContent = document.getElementById("content-sections")
     for (const section of mainContent.children) {

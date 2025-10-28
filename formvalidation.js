@@ -5,6 +5,10 @@ const nameTextField = document.getElementById('form-name');
 const confirmCheckbox = document.getElementById('form-confirm');
 const errorContainer = document.getElementById('form-errors');
 
+confirmCheckbox.addEventListener("change", (e) => {
+    submitButton.disabled = !confirmCheckbox.checked;
+});
+
 form.addEventListener('submit', (e) => {
     let errorMessagesList = [];
     if (!nameTextField.checkValidity()) {
@@ -37,10 +41,6 @@ form.addEventListener('submit', (e) => {
             errorContainer.appendChild(p)
         }
     }
-});
-
-confirmCheckbox.addEventListener("change", (e) => {
-    submitButton.disabled = !confirmCheckbox.checked;
 });
 
 function addErrorMessageToList(errorMessages, inputElement, errorMessage) {

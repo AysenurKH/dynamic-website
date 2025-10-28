@@ -1,7 +1,8 @@
 import {Comment} from "./comment.js";
-import {showModal} from "./modal.js";
+import {showMyModal} from "./modal.js";
 
 export class Post {
+    
     constructor(id, title, body, likes, dislikes, tags, userId, userName) {
         this.id = id;
         this.title = title;
@@ -33,7 +34,7 @@ export class Post {
         titleHeader.innerText = this.title;
         body.innerText = this.body;
         likes.innerText = `Likes: ${this.likes} | Dislikes: ${this.dislikes}`;
-        tags.innerText = this.tags.join(" ");
+        tags.innerText = `Tags: ${this.tags.join(" ")}`;
         summary.innerText = "Comments";
 
         usernameHeader.addEventListener("click", (e) => {
@@ -66,29 +67,28 @@ export class Post {
             const response = await fetch(`https://dummyjson.com/comments/post/${this.id}?limit=0`);
 
             if (!response.ok) {
-                showModal(`HTTP ${response.status} – ${response.statusText}`);
+                showMyModal(`HTTP ${response.status} – ${response.statusText}`);
             }
 
 
             return await response.json();
         } catch (error) {
-            showModal(`Error fetching posts: ${error}`)
+            showMyModal(`Error fetching posts: ${error}`)
         }
     }
 
     showCommentData(commentsContainer, commentData) {
         const {comments} = commentData;
-        if (!comments.length) {
-            const noCommentsParagraph = document.createElement("p");
-            noCommentsParagraph.innerText = "No comments available";
-            commentsContainer.appendChild(noCommentsParagraph);
-        } else {
+        if (comments.length) {
             for (const comment of comments) {
-                const {body, likes, user} = comment;
-                const {username} = user;
+                const { body, likes, user: {username} } = comment;
                 const commentObject = new Comment(body, likes, username);
                 commentsContainer.appendChild(commentObject.asHtml());
             }
+        } else {
+            const noCommentsParagraph = document.createElement("p");
+            noCommentsParagraph.innerText = "No comments available";
+            commentsContainer.appendChild(noCommentsParagraph);
         }
         this.commentsFetched = true;
     }
@@ -98,12 +98,12 @@ export class Post {
             const response = await fetch(`https://dummyjson.com/users/${this.userId}`);
 
             if (!response.ok) {
-                showModal(`HTTP ${response.status} – ${response.statusText}`);
+                showMyModal(`HTTP ${response.status} – ${response.statusText}`);
             }
 
             return await response.json();
         } catch (error) {
-            showModal(`Error fetching posts: ${error}`)
+            showMyModal(`Error fetching posts: ${error}`)
         }
     }
 
@@ -114,6 +114,6 @@ export class Post {
             Name: ${firstName}
             IP: ${ip}
             Address: ${addr}`;
-        showModal(textToShow)
+        showMyModal(textToShow)
     }
 }
